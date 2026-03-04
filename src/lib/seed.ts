@@ -2,11 +2,16 @@ import type { Category } from '@/types/category'
 import type { Recipe } from '@/types/recipe'
 import type { MealPlan } from '@/types/meal-plan'
 import type { ItemTemplate } from '@/types/item-template'
+import type { List } from '@/types/list'
 import { getMondayString } from '@/lib/date'
+import { generateShoppingList } from '@/lib/generate-list'
 
 type AddRecipe = (recipe: Omit<Recipe, 'id' | 'createdAt' | 'updatedAt'>) => Recipe
 type AddMealPlan = (plan: Omit<MealPlan, 'id' | 'createdAt' | 'updatedAt'>) => MealPlan
-type AddItemTemplate = (template: Omit<ItemTemplate, 'id' | 'createdAt' | 'updatedAt'>) => void
+type AddItemTemplate = (
+  template: Omit<ItemTemplate, 'id' | 'createdAt' | 'updatedAt'>
+) => ItemTemplate
+type AddList = (list: Omit<List, 'id' | 'createdAt' | 'updatedAt'>) => List
 
 function byName(categories: Category[], name: string): string | null {
   return categories.find((c) => c.name === name)?.id ?? null
@@ -16,7 +21,8 @@ export function seedMockData(
   categories: Category[],
   addRecipe: AddRecipe,
   addMealPlan: AddMealPlan,
-  addItemTemplate: AddItemTemplate
+  addItemTemplate: AddItemTemplate,
+  addList: AddList
 ) {
   const dairy = byName(categories, 'Dairy')
   const pantry = byName(categories, 'Pantry')
@@ -293,7 +299,7 @@ export function seedMockData(
   })
 
   // Recurring items
-  addItemTemplate({
+  const milk = addItemTemplate({
     name: 'Milk',
     categoryId: dairy,
     defaultUnit: 'liter',
@@ -301,7 +307,7 @@ export function seedMockData(
     recurring: true,
     recurrenceRule: 'weekly',
   })
-  addItemTemplate({
+  const bread = addItemTemplate({
     name: 'Bread',
     categoryId: pantry,
     defaultUnit: 'loaf',
@@ -312,7 +318,7 @@ export function seedMockData(
 
   // Current week meal plan
   const weekStartDate = getMondayString(new Date())
-  addMealPlan({
+  const mealPlan = addMealPlan({
     name: `Week of ${weekStartDate}`,
     weekStartDate,
     entries: [
@@ -325,5 +331,17 @@ export function seedMockData(
       },
       { id: crypto.randomUUID(), dayOfWeek: 'friday', mealType: 'dinner', recipeId: stirFry.id },
     ],
+  })
+
+  // Shopping list for the current week
+  const allRecipes = [tacos, bolognese, stirFry]
+  const allTemplates = [milk, bread]
+  const items = generateShoppingList(mealPlan, allRecipes, allTemplates, categories)
+  addList({
+    name: mealPlan.name ?? `Week of ${weekStartDate}`,
+    type: 'shopping',
+    mealPlanId: mealPlan.id,
+    archived: false,
+    items,
   })
 }

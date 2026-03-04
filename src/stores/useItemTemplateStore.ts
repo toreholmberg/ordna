@@ -4,7 +4,7 @@ import type { ItemTemplate } from '@/types/item-template'
 
 interface ItemTemplateStore {
   itemTemplates: ItemTemplate[]
-  addItemTemplate: (template: Omit<ItemTemplate, 'id' | 'createdAt' | 'updatedAt'>) => void
+  addItemTemplate: (template: Omit<ItemTemplate, 'id' | 'createdAt' | 'updatedAt'>) => ItemTemplate
   updateItemTemplate: (
     id: string,
     updates: Partial<Omit<ItemTemplate, 'id' | 'createdAt' | 'updatedAt'>>
@@ -22,12 +22,14 @@ export const useItemTemplateStore = create<ItemTemplateStore>()(
 
       addItemTemplate: (template) => {
         const now = new Date().toISOString()
-        set((state) => ({
-          itemTemplates: [
-            ...state.itemTemplates,
-            { ...template, id: crypto.randomUUID(), createdAt: now, updatedAt: now },
-          ],
-        }))
+        const newTemplate: ItemTemplate = {
+          ...template,
+          id: crypto.randomUUID(),
+          createdAt: now,
+          updatedAt: now,
+        }
+        set((state) => ({ itemTemplates: [...state.itemTemplates, newTemplate] }))
+        return newTemplate
       },
 
       updateItemTemplate: (id, updates) => {

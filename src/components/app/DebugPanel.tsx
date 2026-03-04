@@ -22,6 +22,7 @@ export function DebugPanel() {
   const resetMealPlans = useMealPlanStore((s) => s.reset)
   const addItemTemplate = useItemTemplateStore((s) => s.addItemTemplate)
   const resetItemTemplates = useItemTemplateStore((s) => s.reset)
+  const addList = useListStore((s) => s.addList)
   const resetLists = useListStore((s) => s.reset)
 
   function clearAll() {
@@ -33,7 +34,7 @@ export function DebugPanel() {
   }
 
   function seed() {
-    seedMockData(categories, addRecipe, addMealPlan, addItemTemplate)
+    seedMockData(categories, addRecipe, addMealPlan, addItemTemplate, addList)
     setOpen(false)
   }
 
@@ -46,7 +47,7 @@ export function DebugPanel() {
     clearAll()
     // Categories are reset synchronously; read fresh state via the store
     const freshCategories = useCategoryStore.getState().categories
-    seedMockData(freshCategories, addRecipe, addMealPlan, addItemTemplate)
+    seedMockData(freshCategories, addRecipe, addMealPlan, addItemTemplate, addList)
     setOpen(false)
   }
 
