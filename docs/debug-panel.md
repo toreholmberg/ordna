@@ -10,11 +10,11 @@ Fixed bottom-right corner of the app (`bottom-24 right-4`), sitting above the bo
 
 Click the wrench icon to open a small card with three actions:
 
-| Action | What it does |
-|--------|-------------|
-| **Seed** | Adds mock recipes, a meal plan for the current week, and recurring item templates. Additive — existing data is kept. |
-| **Clear** | Resets all stores to empty (categories reset to defaults). |
-| **Reset & Seed** | Clears all stores first, then seeds fresh mock data. Most useful for getting back to a known good state. |
+| Action           | What it does                                                                                                         |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------- |
+| **Seed**         | Adds mock recipes, a meal plan for the current week, and recurring item templates. Additive — existing data is kept. |
+| **Clear**        | Resets all stores to empty (categories reset to defaults).                                                           |
+| **Reset & Seed** | Clears all stores first, then seeds fresh mock data. Most useful for getting back to a known good state.             |
 
 After any action the panel closes automatically.
 
