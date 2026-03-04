@@ -19,6 +19,7 @@ interface ListStore {
   toggleItem: (listId: string, itemId: string) => void
   archiveList: (id: string) => void
   replaceItems: (listId: string, items: ListItem[]) => void
+  reset: () => void
 }
 
 export const useListStore = create<ListStore>()(
@@ -97,6 +98,8 @@ export const useListStore = create<ListStore>()(
           lists: state.lists.map((l) => (l.id === listId ? { ...l, items, updatedAt: now } : l)),
         }))
       },
+
+      reset: () => set({ lists: [] }),
     }),
     { name: 'ordna-lists' }
   )

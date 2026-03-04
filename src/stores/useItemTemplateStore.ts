@@ -12,6 +12,7 @@ interface ItemTemplateStore {
   deleteItemTemplate: (id: string) => void
   getById: (id: string) => ItemTemplate | undefined
   getRecurring: () => ItemTemplate[]
+  reset: () => void
 }
 
 export const useItemTemplateStore = create<ItemTemplateStore>()(
@@ -46,6 +47,8 @@ export const useItemTemplateStore = create<ItemTemplateStore>()(
       getById: (id) => get().itemTemplates.find((t) => t.id === id),
 
       getRecurring: () => get().itemTemplates.filter((t) => t.recurring),
+
+      reset: () => set({ itemTemplates: [] }),
     }),
     { name: 'ordna-item-templates' }
   )

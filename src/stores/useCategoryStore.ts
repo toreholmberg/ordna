@@ -67,6 +67,7 @@ interface CategoryStore {
   updateCategory: (id: string, updates: Partial<Omit<Category, 'id'>>) => void
   deleteCategory: (id: string) => void
   getById: (id: string) => Category | undefined
+  reset: () => void
 }
 
 export const useCategoryStore = create<CategoryStore>()(
@@ -90,6 +91,8 @@ export const useCategoryStore = create<CategoryStore>()(
         })),
 
       getById: (id) => get().categories.find((c) => c.id === id),
+
+      reset: () => set({ categories: DEFAULT_CATEGORIES }),
     }),
     { name: 'ordna-categories' }
   )
