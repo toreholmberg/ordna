@@ -11,6 +11,7 @@ interface RecipeStore {
   ) => void
   deleteRecipe: (id: string) => void
   getById: (id: string) => Recipe | undefined
+  reset: () => void
 }
 
 export const useRecipeStore = create<RecipeStore>()(
@@ -42,6 +43,8 @@ export const useRecipeStore = create<RecipeStore>()(
       deleteRecipe: (id) => set((state) => ({ recipes: state.recipes.filter((r) => r.id !== id) })),
 
       getById: (id) => get().recipes.find((r) => r.id === id),
+
+      reset: () => set({ recipes: [] }),
     }),
     { name: 'ordna-recipes' }
   )

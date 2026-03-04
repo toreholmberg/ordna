@@ -1,4 +1,5 @@
 import { BottomNav } from '@/components/app/BottomNav'
+import { DebugPanel } from '@/components/app/DebugPanel'
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -7,6 +8,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         <div className="container mx-auto max-w-2xl px-4 py-4">{children}</div>
       </main>
       <BottomNav />
+      <DebugPanel />
     </div>
   )
 }

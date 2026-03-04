@@ -15,6 +15,7 @@ interface MealPlanStore {
   getOrCreateCurrentWeek: () => MealPlan
   setEntry: (planId: string, entry: Omit<MealPlanEntry, 'id'> & { id?: string }) => void
   removeEntry: (planId: string, entryId: string) => void
+  reset: () => void
 }
 
 export const useMealPlanStore = create<MealPlanStore>()(
@@ -88,6 +89,8 @@ export const useMealPlanStore = create<MealPlanStore>()(
           ),
         }))
       },
+
+      reset: () => set({ mealPlans: [] }),
     }),
     { name: 'ordna-meal-plans' }
   )
