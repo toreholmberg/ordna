@@ -6,7 +6,10 @@ import { getMonday } from '@/lib/date'
 interface MealPlanStore {
   mealPlans: MealPlan[]
   addMealPlan: (plan: Omit<MealPlan, 'id' | 'createdAt' | 'updatedAt'>) => MealPlan
-  updateMealPlan: (id: string, updates: Partial<Omit<MealPlan, 'id' | 'createdAt' | 'updatedAt'>>) => void
+  updateMealPlan: (
+    id: string,
+    updates: Partial<Omit<MealPlan, 'id' | 'createdAt' | 'updatedAt'>>
+  ) => void
   deleteMealPlan: (id: string) => void
   getById: (id: string) => MealPlan | undefined
   getOrCreateCurrentWeek: () => MealPlan
@@ -21,7 +24,12 @@ export const useMealPlanStore = create<MealPlanStore>()(
 
       addMealPlan: (plan) => {
         const now = new Date().toISOString()
-        const newPlan: MealPlan = { ...plan, id: crypto.randomUUID(), createdAt: now, updatedAt: now }
+        const newPlan: MealPlan = {
+          ...plan,
+          id: crypto.randomUUID(),
+          createdAt: now,
+          updatedAt: now,
+        }
         set((state) => ({ mealPlans: [...state.mealPlans, newPlan] }))
         return newPlan
       },

@@ -48,12 +48,12 @@ export function DayPlanRow({ planId, day, recipeId, entryId }: DayPlanRowProps) 
   }
 
   return (
-    <div className="flex items-center justify-between py-3 border-b last:border-0">
-      <span className="text-sm font-medium w-24 shrink-0">{DAY_LABELS[day]}</span>
-      <div className="flex-1 flex items-center justify-end gap-2">
+    <div className="flex items-center justify-between border-b py-3 last:border-0">
+      <span className="w-24 shrink-0 text-sm font-medium">{DAY_LABELS[day]}</span>
+      <div className="flex flex-1 items-center justify-end gap-2">
         {recipe ? (
           <div className="flex items-center gap-2">
-            <span className="text-sm text-foreground line-clamp-1">{recipe.name}</span>
+            <span className="text-foreground line-clamp-1 text-sm">{recipe.name}</span>
             <Button variant="ghost" size="icon" className="h-7 w-7" onClick={handleRemove}>
               <X className="h-3.5 w-3.5" />
             </Button>
@@ -65,7 +65,7 @@ export function DayPlanRow({ planId, day, recipeId, entryId }: DayPlanRowProps) 
             className="text-muted-foreground"
             onClick={() => setPickerOpen(true)}
           >
-            <Plus className="h-4 w-4 mr-1" />
+            <Plus className="mr-1 h-4 w-4" />
             Add dinner
           </Button>
         )}

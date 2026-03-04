@@ -21,7 +21,7 @@ export function RecipeDetailPage({ id }: RecipeDetailPageProps) {
 
   if (!recipe) {
     return (
-      <div className="text-center py-12">
+      <div className="py-12 text-center">
         <p className="text-muted-foreground">Recipe not found.</p>
         <Button variant="link" onClick={() => router.push('/recipes')}>
           Back to recipes
@@ -41,26 +41,26 @@ export function RecipeDetailPage({ id }: RecipeDetailPageProps) {
 
   return (
     <div>
-      <div className="flex items-center gap-3 mb-4">
+      <div className="mb-4 flex items-center gap-3">
         <Button variant="ghost" size="icon" onClick={() => router.back()}>
           <ArrowLeft className="h-5 w-5" />
         </Button>
-        <h1 className="text-lg font-semibold flex-1 leading-tight">{recipe.name}</h1>
+        <h1 className="flex-1 text-lg leading-tight font-semibold">{recipe.name}</h1>
         <Link href={`/recipes/${id}/edit`} aria-label="Edit recipe">
           <Button variant="ghost" size="icon" tabIndex={-1}>
             <Pencil className="h-4 w-4" />
           </Button>
         </Link>
         <Button variant="ghost" size="icon" aria-label="Delete recipe" onClick={handleDelete}>
-          <Trash2 className="h-4 w-4 text-destructive" />
+          <Trash2 className="text-destructive h-4 w-4" />
         </Button>
       </div>
 
       {recipe.description && (
-        <p className="text-sm text-muted-foreground mb-4">{recipe.description}</p>
+        <p className="text-muted-foreground mb-4 text-sm">{recipe.description}</p>
       )}
 
-      <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
+      <div className="text-muted-foreground mb-4 flex items-center gap-4 text-sm">
         {totalTime > 0 && (
           <span className="flex items-center gap-1">
             <Clock className="h-4 w-4" />
@@ -74,7 +74,7 @@ export function RecipeDetailPage({ id }: RecipeDetailPageProps) {
       </div>
 
       {recipe.tags.length > 0 && (
-        <div className="flex flex-wrap gap-1 mb-4">
+        <div className="mb-4 flex flex-wrap gap-1">
           {recipe.tags.map((tag) => (
             <Badge key={tag} variant="secondary">
               {tag}
@@ -85,14 +85,14 @@ export function RecipeDetailPage({ id }: RecipeDetailPageProps) {
 
       <Separator className="my-4" />
 
-      <h2 className="text-sm font-medium mb-3">Ingredients</h2>
+      <h2 className="mb-3 text-sm font-medium">Ingredients</h2>
       <IngredientList ingredients={recipe.ingredients} />
 
       {recipe.instructions && (
         <>
           <Separator className="my-4" />
-          <h2 className="text-sm font-medium mb-3">Instructions</h2>
-          <p className="text-sm whitespace-pre-wrap leading-relaxed">{recipe.instructions}</p>
+          <h2 className="mb-3 text-sm font-medium">Instructions</h2>
+          <p className="text-sm leading-relaxed whitespace-pre-wrap">{recipe.instructions}</p>
         </>
       )}
 
@@ -103,7 +103,7 @@ export function RecipeDetailPage({ id }: RecipeDetailPageProps) {
             href={recipe.sourceUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 text-sm text-primary"
+            className="text-primary flex items-center gap-2 text-sm"
           >
             <ExternalLink className="h-4 w-4" />
             Original recipe

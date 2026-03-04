@@ -2,12 +2,7 @@
 
 import { useState } from 'react'
 import { Search } from 'lucide-react'
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { useRecipeStore } from '@/stores/useRecipeStore'
 import type { Recipe } from '@/types/recipe'
@@ -39,7 +34,7 @@ export function RecipePicker({ open, onClose, onSelect }: RecipePickerProps) {
           <DialogTitle>Pick a recipe</DialogTitle>
         </DialogHeader>
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
           <Input
             placeholder="Search recipes..."
             value={search}
@@ -48,23 +43,21 @@ export function RecipePicker({ open, onClose, onSelect }: RecipePickerProps) {
             autoFocus
           />
         </div>
-        <div className="max-h-72 overflow-y-auto space-y-1 mt-1">
+        <div className="mt-1 max-h-72 space-y-1 overflow-y-auto">
           {filtered.length === 0 ? (
-            <p className="text-sm text-muted-foreground text-center py-6">
+            <p className="text-muted-foreground py-6 text-center text-sm">
               {recipes.length === 0 ? 'No recipes yet. Add some first.' : 'No matches.'}
             </p>
           ) : (
             filtered.map((recipe) => (
               <button
                 key={recipe.id}
-                className="w-full text-left px-3 py-3 rounded-md hover:bg-accent transition-colors text-sm"
+                className="hover:bg-accent w-full rounded-md px-3 py-3 text-left text-sm transition-colors"
                 onClick={() => handleSelect(recipe)}
               >
                 <span className="font-medium">{recipe.name}</span>
                 {recipe.servings && (
-                  <span className="text-muted-foreground ml-2">
-                    ({recipe.servings} servings)
-                  </span>
+                  <span className="text-muted-foreground ml-2">({recipe.servings} servings)</span>
                 )}
               </button>
             ))

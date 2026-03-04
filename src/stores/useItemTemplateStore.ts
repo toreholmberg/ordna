@@ -5,7 +5,10 @@ import type { ItemTemplate } from '@/types/item-template'
 interface ItemTemplateStore {
   itemTemplates: ItemTemplate[]
   addItemTemplate: (template: Omit<ItemTemplate, 'id' | 'createdAt' | 'updatedAt'>) => void
-  updateItemTemplate: (id: string, updates: Partial<Omit<ItemTemplate, 'id' | 'createdAt' | 'updatedAt'>>) => void
+  updateItemTemplate: (
+    id: string,
+    updates: Partial<Omit<ItemTemplate, 'id' | 'createdAt' | 'updatedAt'>>
+  ) => void
   deleteItemTemplate: (id: string) => void
   getById: (id: string) => ItemTemplate | undefined
   getRecurring: () => ItemTemplate[]

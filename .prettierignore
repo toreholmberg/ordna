@@ -1,0 +1,6 @@
+.next/
+node_modules/
+public/
+pnpm-lock.yaml
+# shadcn/ui components are read-only (see CLAUDE.md)
+src/components/ui/

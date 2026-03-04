@@ -27,15 +27,15 @@ export function CategoryManager() {
 
   return (
     <div>
-      <h2 className="text-sm font-medium mb-3">Categories</h2>
-      <div className="rounded-lg border bg-card divide-y divide-border overflow-hidden mb-3">
+      <h2 className="mb-3 text-sm font-medium">Categories</h2>
+      <div className="bg-card divide-border mb-3 divide-y overflow-hidden rounded-lg border">
         {sorted.map((cat) => (
           <div key={cat.id} className="flex items-center justify-between px-4 py-3">
             <span className="text-sm">{cat.name}</span>
             <Button
               variant="ghost"
               size="icon"
-              className="h-7 w-7 text-muted-foreground hover:text-destructive"
+              className="text-muted-foreground hover:text-destructive h-7 w-7"
               onClick={() => deleteCategory(cat.id)}
             >
               <Trash2 className="h-3.5 w-3.5" />

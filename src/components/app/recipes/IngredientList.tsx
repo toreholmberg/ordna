@@ -8,14 +8,14 @@ interface IngredientListProps {
 
 export function IngredientList({ ingredients }: IngredientListProps) {
   if (ingredients.length === 0) {
-    return <p className="text-sm text-muted-foreground">No ingredients added.</p>
+    return <p className="text-muted-foreground text-sm">No ingredients added.</p>
   }
 
   return (
     <ul className="space-y-2">
       {ingredients.map((ing) => (
         <li key={ing.id} className="flex items-start gap-2 text-sm">
-          <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-foreground shrink-0" />
+          <span className="bg-foreground mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full" />
           <span>
             {ing.quantity != null && (
               <span className="font-medium">
@@ -24,9 +24,7 @@ export function IngredientList({ ingredients }: IngredientListProps) {
               </span>
             )}
             {ing.name}
-            {ing.notes && (
-              <span className="text-muted-foreground"> — {ing.notes}</span>
-            )}
+            {ing.notes && <span className="text-muted-foreground"> — {ing.notes}</span>}
           </span>
         </li>
       ))}

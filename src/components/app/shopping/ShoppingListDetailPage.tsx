@@ -16,7 +16,7 @@ export function ShoppingListDetailPage({ id }: ShoppingListDetailPageProps) {
 
   if (!list) {
     return (
-      <div className="text-center py-12">
+      <div className="py-12 text-center">
         <p className="text-muted-foreground">List not found.</p>
         <Button variant="link" onClick={() => router.push('/lists')}>
           Back to lists

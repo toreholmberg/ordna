@@ -10,7 +10,11 @@ interface ListStore {
   getById: (id: string) => List | undefined
   getActive: () => List | undefined
   addItem: (listId: string, item: Omit<ListItem, 'id' | 'addedAt'>) => void
-  updateItem: (listId: string, itemId: string, updates: Partial<Omit<ListItem, 'id' | 'addedAt'>>) => void
+  updateItem: (
+    listId: string,
+    itemId: string,
+    updates: Partial<Omit<ListItem, 'id' | 'addedAt'>>
+  ) => void
   removeItem: (listId: string, itemId: string) => void
   toggleItem: (listId: string, itemId: string) => void
   archiveList: (id: string) => void
@@ -32,28 +36,22 @@ export const useListStore = create<ListStore>()(
       updateList: (id, updates) => {
         const now = new Date().toISOString()
         set((state) => ({
-          lists: state.lists.map((l) =>
-            l.id === id ? { ...l, ...updates, updatedAt: now } : l
-          ),
+          lists: state.lists.map((l) => (l.id === id ? { ...l, ...updates, updatedAt: now } : l)),
         }))
       },
 
-      deleteList: (id) =>
-        set((state) => ({ lists: state.lists.filter((l) => l.id !== id) })),
+      deleteList: (id) => set((state) => ({ lists: state.lists.filter((l) => l.id !== id) })),
 
       getById: (id) => get().lists.find((l) => l.id === id),
 
-      getActive: () =>
-        get().lists.find((l) => l.type === 'shopping' && !l.archived),
+      getActive: () => get().lists.find((l) => l.type === 'shopping' && !l.archived),
 
       addItem: (listId, item) => {
         const now = new Date().toISOString()
         const newItem: ListItem = { ...item, id: crypto.randomUUID(), addedAt: now }
         set((state) => ({
           lists: state.lists.map((l) =>
-            l.id === listId
-              ? { ...l, items: [...l.items, newItem], updatedAt: now }
-              : l
+            l.id === listId ? { ...l, items: [...l.items, newItem], updatedAt: now } : l
           ),
         }))
       },
@@ -96,9 +94,7 @@ export const useListStore = create<ListStore>()(
       replaceItems: (listId, items) => {
         const now = new Date().toISOString()
         set((state) => ({
-          lists: state.lists.map((l) =>
-            l.id === listId ? { ...l, items, updatedAt: now } : l
-          ),
+          lists: state.lists.map((l) => (l.id === listId ? { ...l, items, updatedAt: now } : l)),
         }))
       },
     }),

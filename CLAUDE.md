@@ -1,6 +1,7 @@
 # Ordna — Claude Code Orientation
 
 ## Current Phase: Phase 1 — Local PWA
+
 All data in localStorage via Zustand persist. No auth, no backend.
 
 **In scope:** recipe library, weekly meal plan, shopping list generation, ad-hoc items, recurring items, categories, settings.
@@ -17,6 +18,34 @@ All data in localStorage via Zustand persist. No auth, no backend.
 - **Co-located hooks/tests** — live next to primary consumer; move to `src/hooks/` only if used in 2+ places
 - **shadcn/ui is read-only** — NEVER modify files in `src/components/ui/`
 - **Stores are flat** — no nested Zustand store calls; stores may read each other's state but never import actions from each other
+
+---
+
+## Code Quality
+
+All three checks must pass before committing. CI enforces the same commands.
+
+```bash
+pnpm lint          # ESLint (next/core-web-vitals) + tsc --noEmit
+pnpm format:check  # Prettier formatting check
+pnpm test:run      # Vitest unit tests (single run)
+```
+
+Fix helpers:
+
+```bash
+pnpm lint:fix   # auto-fix ESLint issues
+pnpm format     # auto-format with Prettier
+pnpm typecheck  # TypeScript only (no ESLint)
+```
+
+### Rules
+
+- **No lint errors** — ESLint config extends `next/core-web-vitals`; rules cover React hooks, Next.js best practices, accessibility, and imports
+- **No type errors** — `strict: true`, no `any`, no `@ts-ignore` without a comment explaining why
+- **Prettier is the formatter** — never hand-format; let Prettier decide. Config: single quotes, no semicolons, 100-char print width, `es5` trailing commas
+- **Tailwind class order** — `prettier-plugin-tailwindcss` sorts classes automatically; do not reorder manually
+- **`src/components/ui/` is excluded from Prettier** — those files are shadcn/ui read-only (see above)
 
 ---
 

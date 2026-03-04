@@ -3,6 +3,7 @@
 ## Philosophy
 
 Test what's actually at risk of breaking. Focus on:
+
 1. Complex logic that's hard to verify visually
 2. User flows that would break silently
 
@@ -11,6 +12,7 @@ Test what's actually at risk of breaking. Focus on:
 **Config:** `vitest.config.ts` — picks up `*.test.ts` and `*.test.tsx` under `src/`.
 
 **Co-located with source:**
+
 ```
 src/lib/generate-list.ts
 src/lib/generate-list.test.ts     ← same directory
@@ -20,6 +22,7 @@ src/lib/date.test.ts
 ```
 
 **Run:**
+
 ```bash
 pnpm test          # watch mode
 pnpm test:run      # single run (CI)
@@ -46,6 +49,7 @@ pnpm test:ui       # Vitest UI
 ## Component Tests (Vitest + Testing Library)
 
 Co-located, only for non-trivial conditional logic:
+
 - `ShoppingListItem.test.tsx` — checked/unchecked state, check event fires
 - `RecipeForm.test.tsx` — validation errors visible on submit
 
@@ -63,3 +67,22 @@ e2e/
 ```
 
 E2E tests are the **primary quality gate** — written alongside each major feature.
+
+## CI (GitHub Actions)
+
+`.github/workflows/ci.yml` runs two parallel jobs on every push and PR to `main`:
+
+| Job               | Commands                                           |
+| ----------------- | -------------------------------------------------- |
+| Lint & Type Check | `pnpm lint` (ESLint + tsc) and `pnpm format:check` |
+| Unit Tests        | `pnpm test:run`                                    |
+
+E2E tests are **not** run in CI (require a running dev server with a real browser). Run them locally before merging significant UI changes.
+
+### Local pre-merge checklist
+
+```bash
+pnpm lint          # must exit 0
+pnpm format:check  # must exit 0
+pnpm test:run      # must exit 0
+```

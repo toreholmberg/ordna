@@ -2,19 +2,19 @@
 
 ## Stack
 
-| Concern | Tool | Version |
-|---|---|---|
-| Framework | Next.js (App Router) | 16.x |
-| Language | TypeScript | strict mode |
-| Styling | Tailwind CSS | v4 |
-| UI Components | shadcn/ui | latest |
-| State | Zustand + persist | 5.x |
-| Data schemas | Zod | 4.x |
-| Forms | React Hook Form + Zod | 7.x |
-| Unit tests | Vitest + Testing Library | 4.x |
-| E2E tests | Playwright | 1.x |
-| Deployment | Vercel | — |
-| PWA | @ducanh2912/next-pwa | 10.x |
+| Concern       | Tool                     | Version     |
+| ------------- | ------------------------ | ----------- |
+| Framework     | Next.js (App Router)     | 16.x        |
+| Language      | TypeScript               | strict mode |
+| Styling       | Tailwind CSS             | v4          |
+| UI Components | shadcn/ui                | latest      |
+| State         | Zustand + persist        | 5.x         |
+| Data schemas  | Zod                      | 4.x         |
+| Forms         | React Hook Form + Zod    | 7.x         |
+| Unit tests    | Vitest + Testing Library | 4.x         |
+| E2E tests     | Playwright               | 1.x         |
+| Deployment    | Vercel                   | —           |
+| PWA           | @ducanh2912/next-pwa     | 10.x        |
 
 ## How the Pieces Connect
 
@@ -54,6 +54,7 @@ Zod schemas (src/types/*) — source of truth for all types
 ## Phase 2 Migration Path
 
 When adding Supabase:
+
 - Replace Zustand `persist` storage adapter with Supabase-backed calls
 - Store interfaces stay the same — components don't change
 - Add TanStack Query for async state + loading/error handling

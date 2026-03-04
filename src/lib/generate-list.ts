@@ -44,9 +44,7 @@ export function generateShoppingList(
     if (!recipe) continue
 
     const servingMultiplier =
-      entry.servings != null && recipe.servings > 0
-        ? entry.servings / recipe.servings
-        : 1
+      entry.servings != null && recipe.servings > 0 ? entry.servings / recipe.servings : 1
 
     for (const ingredient of recipe.ingredients) {
       // Ad-hoc ingredients (no itemTemplateId) are always added separately
@@ -55,9 +53,7 @@ export function generateShoppingList(
         mergedItems.set(key, {
           name: ingredient.name,
           quantity:
-            ingredient.quantity != null
-              ? ingredient.quantity * servingMultiplier
-              : undefined,
+            ingredient.quantity != null ? ingredient.quantity * servingMultiplier : undefined,
           unit: ingredient.unit,
           categoryId: null,
           itemTemplateId: null,
@@ -85,9 +81,7 @@ export function generateShoppingList(
         mergedItems.set(key, {
           name: ingredient.name,
           quantity:
-            ingredient.quantity != null
-              ? ingredient.quantity * servingMultiplier
-              : undefined,
+            ingredient.quantity != null ? ingredient.quantity * servingMultiplier : undefined,
           unit: ingredient.unit ?? template?.defaultUnit,
           categoryId: template?.categoryId ?? null,
           itemTemplateId: ingredient.itemTemplateId,

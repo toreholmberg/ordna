@@ -14,20 +14,15 @@ interface ShoppingListItemProps {
 
 export function ShoppingListItem({ item, onToggle, onRemove }: ShoppingListItemProps) {
   return (
-    <div className="flex items-center gap-3 min-h-[56px] py-2">
+    <div className="flex min-h-[56px] items-center gap-3 py-2">
       <Checkbox
         checked={item.checked}
         onCheckedChange={onToggle}
         className="h-6 w-6 shrink-0"
         aria-label={`Mark ${item.name} as ${item.checked ? 'unchecked' : 'checked'}`}
       />
-      <div className="flex-1 min-w-0">
-        <span
-          className={cn(
-            'text-base',
-            item.checked && 'line-through text-muted-foreground'
-          )}
-        >
+      <div className="min-w-0 flex-1">
+        <span className={cn('text-base', item.checked && 'text-muted-foreground line-through')}>
           {item.quantity != null && (
             <span className="font-medium">
               {item.quantity % 1 === 0 ? item.quantity : item.quantity.toFixed(1)}
@@ -36,14 +31,12 @@ export function ShoppingListItem({ item, onToggle, onRemove }: ShoppingListItemP
           )}
           {item.name}
         </span>
-        {item.notes && (
-          <p className="text-xs text-muted-foreground mt-0.5">{item.notes}</p>
-        )}
+        {item.notes && <p className="text-muted-foreground mt-0.5 text-xs">{item.notes}</p>}
       </div>
       <Button
         variant="ghost"
         size="icon"
-        className="h-8 w-8 shrink-0 text-muted-foreground hover:text-destructive"
+        className="text-muted-foreground hover:text-destructive h-8 w-8 shrink-0"
         onClick={onRemove}
         aria-label={`Remove ${item.name}`}
       >
