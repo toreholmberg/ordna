@@ -21,6 +21,16 @@ All data in localStorage via Zustand persist. No auth, no backend.
 
 ---
 
+## Git Workflow
+
+- **Never commit directly to `main`** — always work on a feature branch
+- **Branch naming:** `type/short-description` (e.g. `feat/recipe-search`, `fix/e2e-selectors`, `docs/deployment`)
+- **Open a draft PR** for every branch — use `gh pr create --draft`
+- **Conventional commits** — format: `type(scope): description` (feat, fix, docs, refactor, test, chore…)
+- **Merge via GitHub** — do not `git merge` locally into main; let GitHub merge the PR
+
+---
+
 ## Code Quality
 
 All three checks must pass before committing. CI enforces the same commands.
