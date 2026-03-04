@@ -2,18 +2,19 @@
 
 ## Platform: Vercel
 
-### Setup
+### Current state
 
-1. Push repo to GitHub
-2. Connect GitHub repo to Vercel project
-3. Automatic: preview deploy on every PR, production on merge to `main`
-4. Initial domain: `ordna.vercel.app`
+- Project: `tore-holmbergs-projects/ordna`
+- Production URL: https://ordna-theta.vercel.app
+- Deployed via Vercel CLI (`vercel --yes`) — first deploy 2026-03-03
+- GitHub repo connected — every push to `main` triggers a production deploy, PRs get preview deploys.
 
 ### Phase 1 (static PWA)
 
 - `next build` output is fully static — no server required
 - Vercel serves from CDN globally
 - PWA manifest + service worker via `@ducanh2912/next-pwa`
+- Manual deploys: `vercel --prod` from the repo root
 
 ### Phase 2 (with Supabase)
 
@@ -31,9 +32,10 @@ Vercel dashboard     # preview + production env vars
 ## Build Commands
 
 ```bash
+pnpm dev            # development server (localhost:3000)
 pnpm build          # production build
 pnpm start          # serve production build locally
-pnpm dev            # development server (localhost:3000)
+vercel --prod       # manual production deploy via CLI
 ```
 
 ## PWA Configuration
