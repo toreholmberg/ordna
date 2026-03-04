@@ -24,30 +24,29 @@ test.describe('Meal Plan Flow', () => {
     // Create a recipe first
     await page.goto('/recipes/new')
     await page.getByLabel('Recipe name').fill('Taco Night')
-
-    // Add ingredient
-    await page.getByRole('button', { name: /add/i }).click()
+    await page.getByRole('button', { name: 'Add ingredient' }).click()
     await page.getByPlaceholder('Name').last().fill('Tortillas')
-
-    await page.getByRole('button', { name: /add recipe/i }).click()
+    await page.getByRole('button', { name: 'Add Recipe' }).click()
+    await expect(page.getByText('Taco Night')).toBeVisible()
 
     // Go to meal plan
     await page.goto('/meal-plan')
 
     // Add dinner for Monday
-    await page.getByRole('button', { name: /add dinner/i }).first().click()
+    await page.getByRole('button', { name: 'Add dinner' }).first().click()
 
     // Recipe picker dialog
     await expect(page.getByText('Pick a recipe')).toBeVisible()
     await page.getByText('Taco Night').click()
 
-    // Monday should now show the recipe
-    await expect(page.getByText('Taco Night')).toBeVisible()
+    // Monday row should now show the recipe name
+    await expect(page.locator('main').getByText('Taco Night').first()).toBeVisible()
 
     // Generate shopping list
-    await page.getByRole('button', { name: /generate list/i }).click()
+    await page.getByRole('button', { name: 'Generate list' }).click()
 
-    // Should navigate to the list detail
+    // Should navigate to the list detail with the ingredient
+    await page.waitForURL(/\/lists\//)
     await expect(page.getByText('Tortillas')).toBeVisible()
   })
 })

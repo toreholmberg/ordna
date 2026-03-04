@@ -225,7 +225,7 @@ export function RecipeForm({ defaultValues, onSubmit, submitLabel = 'Save Recipe
         <div>
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-sm font-medium">Ingredients</h3>
-            <Button type="button" variant="outline" size="sm" onClick={addIngredient}>
+            <Button type="button" variant="outline" size="sm" aria-label="Add ingredient" onClick={addIngredient}>
               <Plus className="h-4 w-4 mr-1" />
               Add
             </Button>

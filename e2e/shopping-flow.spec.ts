@@ -7,78 +7,58 @@ test.describe('Shopping Flow', () => {
     await page.reload()
   })
 
-  test('can add a manual item to a list', async ({ page }) => {
-    // Create a list via meal plan + generate
+  async function createListWithIngredient(page: ReturnType<typeof test.extend>, recipeName: string, ingredient: string) {
     await page.goto('/recipes/new')
-    await page.getByLabel('Recipe name').fill('Quick Recipe')
-    await page.getByRole('button', { name: /add/i }).click()
-    await page.getByPlaceholder('Name').last().fill('Garlic')
-    await page.getByRole('button', { name: /add recipe/i }).click()
+    await page.getByLabel('Recipe name').fill(recipeName)
+    await page.getByRole('button', { name: 'Add ingredient' }).click()
+    await page.getByPlaceholder('Name').last().fill(ingredient)
+    await page.getByRole('button', { name: 'Add Recipe' }).click()
+    await expect(page.getByText(recipeName)).toBeVisible()
 
     await page.goto('/meal-plan')
-    await page.getByRole('button', { name: /add dinner/i }).first().click()
-    await page.getByText('Quick Recipe').click()
-    await page.getByRole('button', { name: /generate list/i }).click()
+    await page.getByRole('button', { name: 'Add dinner' }).first().click()
+    await page.getByText(recipeName).click()
+    await page.getByRole('button', { name: 'Generate list' }).click()
+    await page.waitForURL(/\/lists\//)
+  }
 
-    // Should be on list detail page with Garlic
+  test('can add a manual item to a list', async ({ page }) => {
+    await createListWithIngredient(page, 'Quick Recipe', 'Garlic')
     await expect(page.getByText('Garlic')).toBeVisible()
 
     // Add a manual item
-    await page.getByRole('button', { name: /add item/i }).click()
-    await expect(page.getByText('Add item')).toBeVisible()
+    await page.getByRole('button', { name: 'Add item' }).click()
+    await expect(page.getByRole('heading', { name: 'Add item' })).toBeVisible()
     await page.getByLabel('Item name').fill('Butter')
-    await page.getByRole('button', { name: /add to list/i }).click()
+    await page.getByRole('button', { name: 'Add to list' }).click()
 
     await expect(page.getByText('Butter')).toBeVisible()
   })
 
   test('can check off items and they persist on refresh', async ({ page }) => {
-    // Create list
-    await page.goto('/recipes/new')
-    await page.getByLabel('Recipe name').fill('Simple Dish')
-    await page.getByRole('button', { name: /add/i }).click()
-    await page.getByPlaceholder('Name').last().fill('Salt')
-    await page.getByRole('button', { name: /add recipe/i }).click()
-
-    await page.goto('/meal-plan')
-    await page.getByRole('button', { name: /add dinner/i }).first().click()
-    await page.getByText('Simple Dish').click()
-    await page.getByRole('button', { name: /generate list/i }).click()
+    await createListWithIngredient(page, 'Simple Dish', 'Salt')
+    await expect(page.getByText('Salt')).toBeVisible()
 
     // Check off Salt
     await page.getByRole('checkbox', { name: /mark salt/i }).click()
     await expect(page.getByRole('checkbox', { name: /mark salt/i })).toBeChecked()
 
-    // Get current URL to come back
-    const url = page.url()
-
-    // Reload
+    // Reload and verify persistence
     await page.reload()
-
-    // Item should still be checked
     await expect(page.getByRole('checkbox', { name: /mark salt/i })).toBeChecked()
   })
 
   test('can navigate from lists page to list detail', async ({ page }) => {
-    // Generate a list
-    await page.goto('/recipes/new')
-    await page.getByLabel('Recipe name').fill('Test Meal')
-    await page.getByRole('button', { name: /add recipe/i }).click()
-
-    await page.goto('/meal-plan')
-    await page.getByRole('button', { name: /add dinner/i }).first().click()
-    await page.getByText('Test Meal').click()
-    await page.getByRole('button', { name: /generate list/i }).click()
+    await createListWithIngredient(page, 'Test Meal', 'Rice')
 
     // Go to lists page
     await page.goto('/lists')
     await expect(page.getByText(/week of/i)).toBeVisible()
 
-    // Click the list
-    const listLink = page.locator('a').filter({ hasText: /week of/i })
-    await listLink.click()
+    // Click the list card (avoid the archive button)
+    await page.locator('a').filter({ hasText: /week of/i }).click()
+    await page.waitForURL(/\/lists\//)
 
-    // Should be on list detail
     await expect(page.url()).toContain('/lists/')
   })
 })

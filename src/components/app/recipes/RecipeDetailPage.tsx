@@ -46,12 +46,12 @@ export function RecipeDetailPage({ id }: RecipeDetailPageProps) {
           <ArrowLeft className="h-5 w-5" />
         </Button>
         <h1 className="text-lg font-semibold flex-1 leading-tight">{recipe.name}</h1>
-        <Link href={`/recipes/${id}/edit`}>
-          <Button variant="ghost" size="icon">
+        <Link href={`/recipes/${id}/edit`} aria-label="Edit recipe">
+          <Button variant="ghost" size="icon" tabIndex={-1}>
             <Pencil className="h-4 w-4" />
           </Button>
         </Link>
-        <Button variant="ghost" size="icon" onClick={handleDelete}>
+        <Button variant="ghost" size="icon" aria-label="Delete recipe" onClick={handleDelete}>
           <Trash2 className="h-4 w-4 text-destructive" />
         </Button>
       </div>
