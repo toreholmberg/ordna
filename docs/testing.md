@@ -67,3 +67,22 @@ e2e/
 ```
 
 E2E tests are the **primary quality gate** — written alongside each major feature.
+
+## CI (GitHub Actions)
+
+`.github/workflows/ci.yml` runs two parallel jobs on every push and PR to `main`:
+
+| Job               | Commands                                           |
+| ----------------- | -------------------------------------------------- |
+| Lint & Type Check | `pnpm lint` (ESLint + tsc) and `pnpm format:check` |
+| Unit Tests        | `pnpm test:run`                                    |
+
+E2E tests are **not** run in CI (require a running dev server with a real browser). Run them locally before merging significant UI changes.
+
+### Local pre-merge checklist
+
+```bash
+pnpm lint          # must exit 0
+pnpm format:check  # must exit 0
+pnpm test:run      # must exit 0
+```

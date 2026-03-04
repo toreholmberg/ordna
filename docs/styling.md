@@ -73,3 +73,21 @@ Uses shadcn `Dialog` component.
 - No inline `style` attributes — use Tailwind only
 - No custom CSS files beyond `globals.css`
 - `globals.css` only contains CSS variables and base styles — no component styles
+
+## Code Formatting
+
+**Prettier** handles all formatting — do not hand-format code.
+
+Config (`.prettierrc`):
+
+| Option          | Value                         | Reason                                                |
+| --------------- | ----------------------------- | ----------------------------------------------------- |
+| `singleQuote`   | `true`                        | consistent with existing codebase                     |
+| `semi`          | `false`                       | cleaner, matches existing style                       |
+| `printWidth`    | `100`                         | readable on modern screens without excessive wrapping |
+| `trailingComma` | `"es5"`                       | safe for all modern JS/TS targets                     |
+| `plugins`       | `prettier-plugin-tailwindcss` | auto-sorts Tailwind class names                       |
+
+**Tailwind class order** is enforced by `prettier-plugin-tailwindcss`. Do not manually reorder classes — run `pnpm format` to fix order automatically.
+
+`src/components/ui/` is excluded from Prettier (shadcn/ui read-only files).

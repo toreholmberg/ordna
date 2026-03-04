@@ -1,5 +1,20 @@
 # Decision Log
 
+## 2026-03-04 Decision: ESLint 9 + Prettier 3 as code quality baseline
+
+**Context:** No linting, formatting, or CI was configured. Needed a `pnpm lint` command usable both locally and in CI.
+**Decision:**
+
+- **ESLint 9** (flat config, `eslint.config.mjs`) extending `eslint-config-next` — covers React hooks, Next.js rules, accessibility, and TypeScript. `eslint-config-prettier` disables any formatting rules that would conflict with Prettier.
+- **Prettier 3** with `prettier-plugin-tailwindcss` — enforces consistent formatting and auto-sorts Tailwind class names. `src/components/ui/` excluded via `.prettierignore` (read-only shadcn files).
+- **`pnpm lint`** runs `eslint . && tsc --noEmit` — one command covers both static analysis and type checking.
+- **GitHub Actions CI** — two parallel jobs: lint+typecheck and unit tests. E2E excluded from CI (needs live browser).
+- **ESLint 10 skipped** — `eslint-plugin-react@7` is not compatible with ESLint 10 at the time of setup.
+  **Alternatives considered:** Biome (fast but immature Next.js support); oxlint (no TypeScript type-aware rules yet).
+  **Consequences:** All existing code was formatted in the initial Prettier pass. Tailwind class order in source files changed to canonical order (no behavioural impact).
+
+---
+
 ## 2026-03-03 Decision: Turbopack config workaround for next-pwa
 
 **Context:** Next.js 16 enables Turbopack by default. `@ducanh2912/next-pwa` injects webpack config, causing a build error.
