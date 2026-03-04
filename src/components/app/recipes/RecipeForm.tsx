@@ -69,7 +69,11 @@ function toFormValues(recipe?: Partial<Recipe>): RecipeFormValues {
   }
 }
 
-export function RecipeForm({ defaultValues, onSubmit, submitLabel = 'Save Recipe' }: RecipeFormProps) {
+export function RecipeForm({
+  defaultValues,
+  onSubmit,
+  submitLabel = 'Save Recipe',
+}: RecipeFormProps) {
   const form = useForm<RecipeFormValues>({
     resolver: zodResolver(RecipeFormSchema),
     defaultValues: toFormValues(defaultValues),
@@ -82,7 +86,10 @@ export function RecipeForm({ defaultValues, onSubmit, submitLabel = 'Save Recipe
 
   function handleSubmit(values: RecipeFormValues) {
     const tags = values.tags
-      ? values.tags.split(',').map((t) => t.trim()).filter(Boolean)
+      ? values.tags
+          .split(',')
+          .map((t) => t.trim())
+          .filter(Boolean)
       : []
 
     onSubmit({
@@ -223,17 +230,23 @@ export function RecipeForm({ defaultValues, onSubmit, submitLabel = 'Save Recipe
 
         {/* Ingredients */}
         <div>
-          <div className="flex items-center justify-between mb-3">
+          <div className="mb-3 flex items-center justify-between">
             <h3 className="text-sm font-medium">Ingredients</h3>
-            <Button type="button" variant="outline" size="sm" aria-label="Add ingredient" onClick={addIngredient}>
-              <Plus className="h-4 w-4 mr-1" />
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              aria-label="Add ingredient"
+              onClick={addIngredient}
+            >
+              <Plus className="mr-1 h-4 w-4" />
               Add
             </Button>
           </div>
           <div className="space-y-3">
             {fields.map((field, index) => (
-              <div key={field.id} className="flex gap-2 items-start">
-                <div className="flex-1 grid grid-cols-[2fr_1fr_1fr] gap-2">
+              <div key={field.id} className="flex items-start gap-2">
+                <div className="grid flex-1 grid-cols-[2fr_1fr_1fr] gap-2">
                   <FormField
                     control={form.control}
                     name={`ingredients.${index}.name`}
@@ -279,7 +292,7 @@ export function RecipeForm({ defaultValues, onSubmit, submitLabel = 'Save Recipe
                   className={index === 0 ? 'mt-6' : ''}
                   onClick={() => remove(index)}
                 >
-                  <Trash2 className="h-4 w-4 text-muted-foreground" />
+                  <Trash2 className="text-muted-foreground h-4 w-4" />
                 </Button>
               </div>
             ))}

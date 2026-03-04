@@ -29,12 +29,12 @@ src/app/
 
 4 tabs (persistent via `(app)/layout.tsx`):
 
-| Tab | Route | Icon |
-|---|---|---|
-| Lists | `/lists` | ShoppingBag |
-| Meal Plan | `/meal-plan` | Calendar |
-| Recipes | `/recipes` | BookOpen |
-| Settings | `/settings` | Settings |
+| Tab       | Route        | Icon        |
+| --------- | ------------ | ----------- |
+| Lists     | `/lists`     | ShoppingBag |
+| Meal Plan | `/meal-plan` | Calendar    |
+| Recipes   | `/recipes`   | BookOpen    |
+| Settings  | `/settings`  | Settings    |
 
 ## Navigation Rules
 

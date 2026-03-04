@@ -9,30 +9,31 @@
 ## Key Patterns
 
 ### Touch Targets
+
 All interactive elements must be at minimum 44×44px (Apple HIG). Shopping list items are 56px min height.
 
 ### Component Structure
+
 ```tsx
 // Named export, co-located with usage
 export function RecipeCard({ recipe }: { recipe: Recipe }) {
-  return (
-    <div className="rounded-lg border bg-card p-4">
-      ...
-    </div>
-  )
+  return <div className="bg-card rounded-lg border p-4">...</div>
 }
 ```
 
 ### Conditional Classes
+
 Use `cn()` from `@/lib/utils` for conditional Tailwind classes:
+
 ```tsx
 import { cn } from '@/lib/utils'
-
-<div className={cn('base-class', condition && 'conditional-class')} />
+;<div className={cn('base-class', condition && 'conditional-class')} />
 ```
 
 ### Color System
+
 Use shadcn CSS variables for theming:
+
 - `bg-background` / `text-foreground` — main background/text
 - `bg-card` / `text-card-foreground` — card surfaces
 - `bg-muted` / `text-muted-foreground` — subtle backgrounds/labels
@@ -40,6 +41,7 @@ Use shadcn CSS variables for theming:
 - `border` — default border
 
 ### Typography
+
 - Page titles: `text-lg font-semibold`
 - Section labels: `text-sm font-medium text-muted-foreground`
 - Body: `text-sm`
@@ -48,19 +50,22 @@ Use shadcn CSS variables for theming:
 ## Layout Patterns
 
 ### Page Layout
+
 ```tsx
 // All pages use this structure via (app)/layout.tsx
-<main className="flex-1 overflow-y-auto pb-20">  {/* pb-20 for bottom nav */}
-  <div className="container mx-auto px-4 py-4 max-w-2xl">
-    {children}
-  </div>
+<main className="flex-1 overflow-y-auto pb-20">
+  {' '}
+  {/* pb-20 for bottom nav */}
+  <div className="container mx-auto max-w-2xl px-4 py-4">{children}</div>
 </main>
 ```
 
 ### Bottom Sheet (AddItemSheet)
+
 Uses shadcn `Sheet` component with `side="bottom"`.
 
 ### Dialog (RecipePicker)
+
 Uses shadcn `Dialog` component.
 
 ## Component Rules

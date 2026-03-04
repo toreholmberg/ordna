@@ -7,7 +7,6 @@
 **Alternatives considered:** Use `--webpack` flag (forces webpack, loses Turbopack speed); wait for next-pwa Turbopack support.
 **Consequences:** App installs as PWA (manifest works), but no offline caching via service worker in Phase 1. This is acceptable — service worker adds caching, not core functionality.
 
-
 Append-only. Newest at top.
 
 ---

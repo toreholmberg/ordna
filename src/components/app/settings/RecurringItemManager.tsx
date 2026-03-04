@@ -42,27 +42,27 @@ export function RecurringItemManager() {
 
   return (
     <div>
-      <div className="flex items-center gap-2 mb-3">
-        <RefreshCw className="h-4 w-4 text-muted-foreground" />
+      <div className="mb-3 flex items-center gap-2">
+        <RefreshCw className="text-muted-foreground h-4 w-4" />
         <h2 className="text-sm font-medium">Recurring items</h2>
       </div>
-      <p className="text-xs text-muted-foreground mb-3">
+      <p className="text-muted-foreground mb-3 text-xs">
         These are always added to your shopping list.
       </p>
       {recurring.length > 0 && (
-        <div className="rounded-lg border bg-card divide-y divide-border overflow-hidden mb-3">
+        <div className="bg-card divide-border mb-3 divide-y overflow-hidden rounded-lg border">
           {recurring.map((t) => (
             <div key={t.id} className="flex items-center justify-between px-4 py-3">
               <div>
                 <span className="text-sm">{t.name}</span>
                 {t.defaultUnit && (
-                  <span className="text-xs text-muted-foreground ml-2">({t.defaultUnit})</span>
+                  <span className="text-muted-foreground ml-2 text-xs">({t.defaultUnit})</span>
                 )}
               </div>
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-7 w-7 text-muted-foreground hover:text-destructive"
+                className="text-muted-foreground hover:text-destructive h-7 w-7"
                 onClick={() => deleteItemTemplate(t.id)}
               >
                 <Trash2 className="h-3.5 w-3.5" />
@@ -98,7 +98,7 @@ export function RecurringItemManager() {
           </Select>
         </div>
         <Button onClick={handleAdd} variant="outline" className="w-full">
-          <Plus className="h-4 w-4 mr-1" />
+          <Plus className="mr-1 h-4 w-4" />
           Add recurring item
         </Button>
       </div>

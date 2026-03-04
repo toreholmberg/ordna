@@ -13,19 +13,20 @@ export function RecipeLibraryPage() {
   const [search, setSearch] = useState('')
 
   const filtered = search.trim()
-    ? recipes.filter((r) =>
-        r.name.toLowerCase().includes(search.toLowerCase()) ||
-        r.tags.some((t) => t.toLowerCase().includes(search.toLowerCase()))
+    ? recipes.filter(
+        (r) =>
+          r.name.toLowerCase().includes(search.toLowerCase()) ||
+          r.tags.some((t) => t.toLowerCase().includes(search.toLowerCase()))
       )
     : recipes
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-4">
+      <div className="mb-4 flex items-center justify-between">
         <h1 className="text-lg font-semibold">Recipes</h1>
         <Link href="/recipes/new">
           <Button size="sm">
-            <Plus className="h-4 w-4 mr-1" />
+            <Plus className="mr-1 h-4 w-4" />
             Add
           </Button>
         </Link>

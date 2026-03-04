@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { type Page, test, expect } from '@playwright/test'
 
 test.describe('Shopping Flow', () => {
   test.beforeEach(async ({ page }) => {
@@ -7,7 +7,7 @@ test.describe('Shopping Flow', () => {
     await page.reload()
   })
 
-  async function createListWithIngredient(page: ReturnType<typeof test.extend>, recipeName: string, ingredient: string) {
+  async function createListWithIngredient(page: Page, recipeName: string, ingredient: string) {
     await page.goto('/recipes/new')
     await page.getByLabel('Recipe name').fill(recipeName)
     await page.getByRole('button', { name: 'Add ingredient' }).click()
@@ -56,7 +56,10 @@ test.describe('Shopping Flow', () => {
     await expect(page.getByText(/week of/i)).toBeVisible()
 
     // Click the list card (avoid the archive button)
-    await page.locator('a').filter({ hasText: /week of/i }).click()
+    await page
+      .locator('a')
+      .filter({ hasText: /week of/i })
+      .click()
     await page.waitForURL(/\/lists\//)
 
     await expect(page.url()).toContain('/lists/')

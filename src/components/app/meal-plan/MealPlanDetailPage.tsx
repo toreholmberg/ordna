@@ -16,7 +16,7 @@ export function MealPlanDetailPage({ id }: MealPlanDetailPageProps) {
 
   if (!mealPlan) {
     return (
-      <div className="text-center py-12">
+      <div className="py-12 text-center">
         <p className="text-muted-foreground">Meal plan not found.</p>
         <Button variant="link" onClick={() => router.push('/meal-plan')}>
           Back to meal plan

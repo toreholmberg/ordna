@@ -12,24 +12,21 @@ interface RecipeCardProps {
 }
 
 export function RecipeCard({ recipe, className }: RecipeCardProps) {
-  const totalTime =
-    (recipe.prepTimeMinutes ?? 0) + (recipe.cookTimeMinutes ?? 0)
+  const totalTime = (recipe.prepTimeMinutes ?? 0) + (recipe.cookTimeMinutes ?? 0)
 
   return (
     <Link href={`/recipes/${recipe.id}`}>
       <div
         className={cn(
-          'rounded-lg border bg-card p-4 transition-colors hover:bg-accent active:bg-accent',
+          'bg-card hover:bg-accent active:bg-accent rounded-lg border p-4 transition-colors',
           className
         )}
       >
-        <h3 className="font-semibold text-base leading-tight mb-2">{recipe.name}</h3>
+        <h3 className="mb-2 text-base leading-tight font-semibold">{recipe.name}</h3>
         {recipe.description && (
-          <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
-            {recipe.description}
-          </p>
+          <p className="text-muted-foreground mb-3 line-clamp-2 text-sm">{recipe.description}</p>
         )}
-        <div className="flex items-center gap-3 text-xs text-muted-foreground mb-2">
+        <div className="text-muted-foreground mb-2 flex items-center gap-3 text-xs">
           {totalTime > 0 && (
             <span className="flex items-center gap-1">
               <Clock className="h-3 w-3" />

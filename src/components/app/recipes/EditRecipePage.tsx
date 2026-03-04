@@ -19,7 +19,7 @@ export function EditRecipePage({ id }: EditRecipePageProps) {
 
   if (!recipe) {
     return (
-      <div className="text-center py-12">
+      <div className="py-12 text-center">
         <p className="text-muted-foreground">Recipe not found.</p>
       </div>
     )
@@ -33,7 +33,7 @@ export function EditRecipePage({ id }: EditRecipePageProps) {
 
   return (
     <div>
-      <div className="flex items-center gap-3 mb-6">
+      <div className="mb-6 flex items-center gap-3">
         <Button variant="ghost" size="icon" onClick={() => router.back()}>
           <ArrowLeft className="h-5 w-5" />
         </Button>

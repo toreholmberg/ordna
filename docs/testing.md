@@ -3,6 +3,7 @@
 ## Philosophy
 
 Test what's actually at risk of breaking. Focus on:
+
 1. Complex logic that's hard to verify visually
 2. User flows that would break silently
 
@@ -11,6 +12,7 @@ Test what's actually at risk of breaking. Focus on:
 **Config:** `vitest.config.ts` — picks up `*.test.ts` and `*.test.tsx` under `src/`.
 
 **Co-located with source:**
+
 ```
 src/lib/generate-list.ts
 src/lib/generate-list.test.ts     ← same directory
@@ -20,6 +22,7 @@ src/lib/date.test.ts
 ```
 
 **Run:**
+
 ```bash
 pnpm test          # watch mode
 pnpm test:run      # single run (CI)
@@ -46,6 +49,7 @@ pnpm test:ui       # Vitest UI
 ## Component Tests (Vitest + Testing Library)
 
 Co-located, only for non-trivial conditional logic:
+
 - `ShoppingListItem.test.tsx` — checked/unchecked state, check event fires
 - `RecipeForm.test.tsx` — validation errors visible on submit
 

@@ -1,6 +1,7 @@
 # Ordna — Claude Code Orientation
 
 ## Current Phase: Phase 1 — Local PWA
+
 All data in localStorage via Zustand persist. No auth, no backend.
 
 **In scope:** recipe library, weekly meal plan, shopping list generation, ad-hoc items, recurring items, categories, settings.

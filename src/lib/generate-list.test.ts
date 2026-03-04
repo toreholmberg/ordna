@@ -50,8 +50,22 @@ const recipe1: Recipe = {
   servings: 4,
   tags: [],
   ingredients: [
-    { id: 'i1', name: 'Onion', itemTemplateId: 'tpl-onion', quantity: 2, unit: 'stk', sortOrder: 0 },
-    { id: 'i2', name: 'Milk', itemTemplateId: 'tpl-milk', quantity: 1, unit: 'liter', sortOrder: 1 },
+    {
+      id: 'i1',
+      name: 'Onion',
+      itemTemplateId: 'tpl-onion',
+      quantity: 2,
+      unit: 'stk',
+      sortOrder: 0,
+    },
+    {
+      id: 'i2',
+      name: 'Milk',
+      itemTemplateId: 'tpl-milk',
+      quantity: 1,
+      unit: 'liter',
+      sortOrder: 1,
+    },
   ],
   createdAt: now,
   updatedAt: now,
@@ -63,7 +77,14 @@ const recipe2: Recipe = {
   servings: 4,
   tags: [],
   ingredients: [
-    { id: 'i3', name: 'Onion', itemTemplateId: 'tpl-onion', quantity: 3, unit: 'stk', sortOrder: 0 },
+    {
+      id: 'i3',
+      name: 'Onion',
+      itemTemplateId: 'tpl-onion',
+      quantity: 3,
+      unit: 'stk',
+      sortOrder: 0,
+    },
   ],
   createdAt: now,
   updatedAt: now,
@@ -147,7 +168,12 @@ describe('generateShoppingList', () => {
       ],
     }
     const items = generateShoppingList(
-      { ...mealPlan, entries: [{ id: 'e1', dayOfWeek: 'monday', mealType: 'dinner', recipeId: recipeWithAdhoc.id }] },
+      {
+        ...mealPlan,
+        entries: [
+          { id: 'e1', dayOfWeek: 'monday', mealType: 'dinner', recipeId: recipeWithAdhoc.id },
+        ],
+      },
       [recipeWithAdhoc],
       [],
       []

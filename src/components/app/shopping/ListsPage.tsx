@@ -28,19 +28,19 @@ export function ListsPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-4">
+      <div className="mb-4 flex items-center justify-between">
         <h1 className="text-lg font-semibold">Lists</h1>
         <Button size="sm" onClick={handleNewList}>
-          <ShoppingBag className="h-4 w-4 mr-1" />
+          <ShoppingBag className="mr-1 h-4 w-4" />
           New list
         </Button>
       </div>
 
       {lists.length === 0 ? (
-        <div className="text-center py-12 text-muted-foreground">
-          <ShoppingBag className="h-12 w-12 mx-auto mb-3 opacity-30" />
+        <div className="text-muted-foreground py-12 text-center">
+          <ShoppingBag className="mx-auto mb-3 h-12 w-12 opacity-30" />
           <p className="text-base">No lists yet.</p>
-          <p className="text-sm mt-1">Create a list from your meal plan.</p>
+          <p className="mt-1 text-sm">Create a list from your meal plan.</p>
         </div>
       ) : (
         <div className="space-y-2">
@@ -49,17 +49,19 @@ export function ListsPage() {
             const total = list.items.length
             return (
               <Link key={list.id} href={`/lists/${list.id}`}>
-                <div className="rounded-lg border bg-card p-4 hover:bg-accent transition-colors">
+                <div className="bg-card hover:bg-accent rounded-lg border p-4 transition-colors">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="font-medium text-sm">{list.name}</p>
-                      <p className="text-xs text-muted-foreground mt-0.5">
+                      <p className="text-sm font-medium">{list.name}</p>
+                      <p className="text-muted-foreground mt-0.5 text-xs">
                         {checked}/{total} items checked
                       </p>
                     </div>
                     <div className="flex items-center gap-2">
                       {checked === total && total > 0 && (
-                        <Badge variant="secondary" className="text-xs">Done</Badge>
+                        <Badge variant="secondary" className="text-xs">
+                          Done
+                        </Badge>
                       )}
                       <Button
                         variant="ghost"
@@ -80,7 +82,7 @@ export function ListsPage() {
             )
           })}
           {archivedLists.length > 0 && (
-            <p className="text-xs text-muted-foreground text-center pt-2">
+            <p className="text-muted-foreground pt-2 text-center text-xs">
               {archivedLists.length} archived list{archivedLists.length > 1 ? 's' : ''}
             </p>
           )}

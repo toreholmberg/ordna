@@ -26,13 +26,13 @@ export const useStore = create<StoreState>()(
 
 ## Stores
 
-| Store | localStorage key | Responsibility |
-|---|---|---|
-| `useRecipeStore` | `ordna-recipes` | Recipe CRUD |
-| `useMealPlanStore` | `ordna-meal-plans` | Meal plan CRUD, current week resolution |
-| `useListStore` | `ordna-lists` | Shopping list CRUD, check-off, archive |
-| `useCategoryStore` | `ordna-categories` | Category CRUD, default seeding |
-| `useItemTemplateStore` | `ordna-item-templates` | Item template CRUD, recurring items |
+| Store                  | localStorage key       | Responsibility                          |
+| ---------------------- | ---------------------- | --------------------------------------- |
+| `useRecipeStore`       | `ordna-recipes`        | Recipe CRUD                             |
+| `useMealPlanStore`     | `ordna-meal-plans`     | Meal plan CRUD, current week resolution |
+| `useListStore`         | `ordna-lists`          | Shopping list CRUD, check-off, archive  |
+| `useCategoryStore`     | `ordna-categories`     | Category CRUD, default seeding          |
+| `useItemTemplateStore` | `ordna-item-templates` | Item template CRUD, recurring items     |
 
 ## Rules
 

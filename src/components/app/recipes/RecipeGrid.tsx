@@ -10,9 +10,9 @@ interface RecipeGridProps {
 export function RecipeGrid({ recipes }: RecipeGridProps) {
   if (recipes.length === 0) {
     return (
-      <div className="text-center py-12 text-muted-foreground">
+      <div className="text-muted-foreground py-12 text-center">
         <p className="text-base">No recipes yet.</p>
-        <p className="text-sm mt-1">Add your first recipe to get started.</p>
+        <p className="mt-1 text-sm">Add your first recipe to get started.</p>
       </div>
     )
   }

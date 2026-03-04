@@ -9,8 +9,8 @@ CategorySchema = z.object({
   id: z.string().uuid(),
   name: z.string().min(1),
   type: z.enum(['grocery', 'household', 'home-improvement', 'custom']),
-  color: z.string().optional(),    // hex, for visual grouping
-  icon: z.string().optional(),     // lucide icon name
+  color: z.string().optional(), // hex, for visual grouping
+  icon: z.string().optional(), // lucide icon name
   sortOrder: z.number().int(),
 })
 ```
@@ -26,9 +26,9 @@ ItemTemplateSchema = z.object({
   id: z.string().uuid(),
   name: z.string().min(1),
   categoryId: z.string().uuid().nullable(),
-  defaultUnit: z.string().optional(),       // 'g', 'kg', 'stk', 'dl', 'liter'
+  defaultUnit: z.string().optional(), // 'g', 'kg', 'stk', 'dl', 'liter'
   defaultQuantity: z.number().optional(),
-  recurring: z.boolean().default(false),    // always added to shopping list
+  recurring: z.boolean().default(false), // always added to shopping list
   recurrenceRule: z.enum(['weekly', 'biweekly', 'monthly']).optional(),
   notes: z.string().optional(),
   createdAt: z.string().datetime(),
@@ -42,7 +42,7 @@ ItemTemplateSchema = z.object({
 IngredientSchema = z.object({
   id: z.string().uuid(),
   itemTemplateId: z.string().uuid().nullable(), // null = ad-hoc ingredient
-  name: z.string().min(1),                      // denormalized for display
+  name: z.string().min(1), // denormalized for display
   quantity: z.number().optional(),
   unit: z.string().optional(),
   notes: z.string().optional(),

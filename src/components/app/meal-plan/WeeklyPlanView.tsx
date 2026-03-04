@@ -36,19 +36,17 @@ export function WeeklyPlanView({ mealPlan }: WeeklyPlanViewProps) {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-4">
+      <div className="mb-4 flex items-center justify-between">
         <h1 className="text-lg font-semibold">{formatWeekLabel(mealPlan.weekStartDate)}</h1>
         <Button size="sm" onClick={handleGenerateList}>
-          <ShoppingBag className="h-4 w-4 mr-1" />
+          <ShoppingBag className="mr-1 h-4 w-4" />
           Generate list
         </Button>
       </div>
 
-      <div className="rounded-lg border bg-card divide-y divide-border overflow-hidden">
+      <div className="bg-card divide-border divide-y overflow-hidden rounded-lg border">
         {DAYS.map((day) => {
-          const entry = mealPlan.entries.find(
-            (e) => e.dayOfWeek === day && e.mealType === 'dinner'
-          )
+          const entry = mealPlan.entries.find((e) => e.dayOfWeek === day && e.mealType === 'dinner')
           return (
             <div key={day} className="px-4">
               <DayPlanRow

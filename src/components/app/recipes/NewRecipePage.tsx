@@ -20,7 +20,7 @@ export function NewRecipePage() {
 
   return (
     <div>
-      <div className="flex items-center gap-3 mb-6">
+      <div className="mb-6 flex items-center gap-3">
         <Button variant="ghost" size="icon" onClick={() => router.back()}>
           <ArrowLeft className="h-5 w-5" />
         </Button>
